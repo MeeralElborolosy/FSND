@@ -183,7 +183,6 @@ def create_venue_submission():
   req = request.get_json()
   print('Request Json....')
   print(req)
-  print(request)
   # TODO: insert form data as a new Venue record in the db, instead
   # TODO: modify data to be the data object returned from db insertion
 

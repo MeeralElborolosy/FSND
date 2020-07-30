@@ -1,6 +1,6 @@
-<!--{% extends 'layouts/main.html' %} -->
-<!--{% block title %}New Venue{% endblock %}-->
-<!--{% block content %}-->
+{% extends 'layouts/main.html' %}
+{% block title %}New Venue{% endblock %}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <div class="form-wrapper">
@@ -32,46 +32,14 @@
       <div class="form-group">
         <label for="genres">Genres</label>
         <small>Ctrl+Click to select multiple</small>
-        {{ form.genres(class_ = 'form-control', placeholder='Genres, separated by commas', id=form.state, autofocus = true) }}
+        {{ form.genres(class_ = 'form-control', placeholder='Genres, separated by commas', autofocus = true) }}
       </div>
       <div class="form-group">
-          <label for="genres">Facebook Link</label>
-          {{ form.facebook_link(class_ = 'form-control', placeholder='http://', id=form.state, autofocus = true) }}
+          <label for="facebook_link">Facebook Link</label>
+          {{ form.facebook_link(class_ = 'form-control', placeholder='http://', autofocus = true) }}
         </div>
       <input type="submit" value="Create Venue" class="btn btn-primary btn-lg btn-block">
     </form>
   </div>
-  <script>
-    console.log("Ana hena");
-document.getElementById('venue_form').onsubmit = function(e){
-      console.log("Ana hena kaman");
-      e.preventDefault();
-      fetch('/venues/create', {
-        method: 'POST',
-        body: JSON.stringify({
-          'name': document.getElementById('name').value,
-          'city': document.getElementById('city').value,
-          'state': document.getElementById('state').value,
-          'address': document.getElementById('address').value,
-          'phone': document.getElementById('phone').value,
-          'genres': document.getElementById('genres').value,
-          'facebook_link': document.getElementById('facebook_link').value,
-          'id': 'meeral'
-        }),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(function(response){
-        return response.json();
-      })
-      .then(function(jsonResponse){
-        console.log(jsonResponse);
-      })
-      .catch(function(){
-        console.log('error');
-      })
-    }
-  </script>
-<!--{% endblock %}-->
+{% endblock %}
 </html>
