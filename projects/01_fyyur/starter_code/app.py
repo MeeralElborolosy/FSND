@@ -41,7 +41,7 @@ class Venue(db.Model):
     phone = db.Column(db.String(120))
     image_link = db.Column(db.String(500), default='')
     facebook_link = db.Column(db.String(120))
-    genres = db.Column(db.String(120))
+    genres = db.Column(db.ARRAY(db.String(120)))
     seeking_talent = db.Column(db.Boolean, default=False)
     seeking_description = db.Column(db.String(500), default='')
 
@@ -181,12 +181,14 @@ def create_venue_form():
 
 @app.route('/venues/create', methods=['POST'])
 def create_venue_submission():
-  req = request.get_json()
+  req = request.form
   error = False
   # TODO: insert form data as a new Venue record in the db, instead
   # TODO: modify data to be the data object returned from db insertion
   try:
-    venue = Venue(name=req['name'], city=['city'], state=req['state'], address=req['address'], phone=req['phone'], genres=req['genres'], facebook_link=req['facebook_link'])
+    print(req.getlist('genres'))
+    venue = Venue(name=req.get('name', ''), city=req.get('city', ''), state=req.get('state', ''), address=req.get('address', ''), phone=req.get('phone', ''), genres=req.getlist('genres'), facebook_link=req.get('facebook_link', ''))
+    print(req)
     db.session.add(venue)
     db.session.commit()
   except:
