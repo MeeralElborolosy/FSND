@@ -213,6 +213,18 @@ def show_artist(artist_id):
   # shows the venue page with the given venue_id
   # TODO: replace with real venue data from the venues table, using venue_id
   data = Artist.query.get(artist_id)
+  data.upcoming_shows = db.session.query(Show.start_time, Show.artist_id, Venue.id.label('venue_id'),
+                                         Venue.name.label('venue_name'),
+                                         Venue.image_link.label('venue_image_link')).filter(Show.artist_id == artist_id,
+                                                                                              Show.start_time > datetime.now()).join(
+      Venue).all()
+  data.upcoming_shows_count = len(data.upcoming_shows)
+  data.past_shows = db.session.query(Show.start_time, Show.artist_id, Venue.id.label('venue_id'),
+                                         Venue.name.label('venue_name'),
+                                         Venue.image_link.label('venue_image_link')).filter(Show.artist_id == artist_id,
+                                                                                              Show.start_time <= datetime.now()).join(
+      Venue).all()
+  data.past_shows_count = len(data.past_shows)
   return render_template('pages/show_artist.html', artist=data)
 
 #  Update
