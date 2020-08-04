@@ -12,7 +12,6 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 import logging
 from logging import Formatter, FileHandler
-from flask_wtf import Form
 from forms import *
 #----------------------------------------------------------------------------#
 # App Config.
@@ -41,6 +40,7 @@ class Venue(db.Model):
     phone = db.Column(db.String(120))
     image_link = db.Column(db.String(500), default='')
     facebook_link = db.Column(db.String(120))
+    website_link = db.Column(db.String(120))
     genres = db.Column(db.ARRAY(db.String(120)))
     seeking_talent = db.Column(db.Boolean, default=False)
     seeking_description = db.Column(db.String(500), default='')
@@ -61,6 +61,7 @@ class Artist(db.Model):
     genres = db.Column(db.ARRAY(db.String(120)))
     image_link = db.Column(db.String(500))
     facebook_link = db.Column(db.String(120))
+    website_link = db.Column(db.String(120))
     seeking_venue = db.Column(db.Boolean, default=False)
     seeking_description = db.Column(db.String(500))
 
@@ -155,7 +156,7 @@ def create_venue_submission():
   # TODO: modify data to be the data object returned from db insertion
   try:
     print(req.getlist('genres'))
-    venue = Venue(name=req.get('name', ''), city=req.get('city', ''), state=req.get('state', ''), address=req.get('address', ''), phone=req.get('phone', ''), genres=req.getlist('genres'), facebook_link=req.get('facebook_link', ''))
+    venue = Venue(name=req.get('name', ''), city=req.get('city', ''), state=req.get('state', ''), address=req.get('address', ''), phone=req.get('phone', ''), genres=req.getlist('genres'), facebook_link=req.get('facebook_link', ''), website_link=req.get('website_link', ''), image_link=req.get('image_link', ''), seeking_talent=(req.get('seeking_talent', '0')=='1'), seeking_description=req.get('seeking_talent_description', ''))
     print(req)
     db.session.add(venue)
     db.session.commit()
@@ -229,12 +230,26 @@ def show_artist(artist_id):
 
 #  Update
 #  ----------------------------------------------------------------
+
+@app.route('/artists/<int:artist_id>/edit', methods=['GET'])
+def edit_artist(artist_id):
+    form = ArtistForm()
+    artist = Artist.query.get(artist_id)
+    return render_template('forms/edit_artist.html', form=form, artist=artist)
+
+
 @app.route('/artists/<int:artist_id>/edit', methods=['POST'])
 def edit_artist_submission(artist_id):
   # TODO: take values from the form submitted, and update existing
   # artist record with ID <artist_id> using the new attributes
 
   return redirect(url_for('show_artist', artist_id=artist_id))
+
+@app.route('/venues/<int:venue_id>/edit', methods=['GET'])
+def edit_venue(venue_id):
+    form = VenueForm()
+    venue = Artist.query.get(venue_id)
+    return render_template('forms/edit_venue.html', form=form, venue=venue)
 
 @app.route('/venues/<int:venue_id>/edit', methods=['POST'])
 def edit_venue_submission(venue_id):
@@ -257,7 +272,7 @@ def create_artist_submission():
   # TODO: insert form data as a new Venue record in the db, instead
   # TODO: modify data to be the data object returned from db insertion
   try:
-    artist = Artist(name=req.get('name', ''), city=req.get('city', ''), state=req.get('state', ''), phone=req.get('phone', ''), genres=req.getlist('genres'), facebook_link=req.get('facebook_link', ''))
+    artist = Artist(name=req.get('name', ''), city=req.get('city', ''), state=req.get('state', ''), phone=req.get('phone', ''), genres=req.getlist('genres'), facebook_link=req.get('facebook_link', ''), website_link=req.get('website_link', ''), image_link=req.get('image_link', ''), seeking_venue=(req.get('seeking_venue', '0')=='1'), seeking_description=req.get('seeking_venue_description', ''))
     db.session.add(artist)
     db.session.commit()
     id = artist.id
@@ -285,7 +300,7 @@ def shows():
   # displays list of shows at /shows
   # TODO: replace with real venues data.
   #       num_shows should be aggregated based on number of upcoming shows per venue.
-  data = db.session.query(Show.id, Show.artist_id, Show.venue_id, Artist.name.label('artist_name'), Venue.name.label('venue_name'), Show.start_time).join(Artist).join(Venue).all()
+  data = db.session.query(Show.id, Show.artist_id, Show.venue_id, Artist.name.label('artist_name'), Artist.image_link.label('artist_image_link'), Venue.name.label('venue_name'), Show.start_time).join(Artist).join(Venue).all()
   return render_template('pages/shows.html', shows=data)
 
 @app.route('/shows/create', methods=['GET'])
