@@ -2,7 +2,7 @@
 # Imports
 #----------------------------------------------------------------------------#
 
-import json
+import datetime
 import sys
 import dateutil.parser
 import babel
@@ -132,6 +132,11 @@ def show_venue(venue_id):
   # shows the venue page with the given venue_id
   # TODO: replace with real venue data from the venues table, using venue_id
   data = Venue.query.get(venue_id)
+  data.upcoming_shows = db.session.query(Show.start_time, Show.venue_id, Artist.id.label('artist_id'), Artist.name.label('artist_name'), Artist.image_link.label('artist_image_link')).filter(Show.venue_id == venue_id, Show.start_time > datetime.now()).join(Artist).all()
+  data.upcoming_shows_count = len(data.upcoming_shows)
+  data.past_shows = db.session.query(Show.start_time, Show.venue_id, Artist.id.label('artist_id'), Artist.name.label('artist_name'), Artist.image_link.label('artist_image_link')).filter(Show.venue_id == venue_id, Show.start_time <= datetime.now()).join(Artist).all()
+  data.past_shows_count = len(data.past_shows)
+
   return render_template('pages/show_venue.html', venue=data)
 
 #  Create Venue
@@ -268,10 +273,7 @@ def shows():
   # displays list of shows at /shows
   # TODO: replace with real venues data.
   #       num_shows should be aggregated based on number of upcoming shows per venue.
-  data = Show.query.all()
-  for show in data:
-      show.artist_name = Artist.query.get(show.artist_id).name
-      show.venue_name = Venue.query.get(show.venue_id).name
+  data = db.session.query(Show.id, Show.artist_id, Show.venue_id, Artist.name.label('artist_name'), Venue.name.label('venue_name'), Show.start_time).join(Artist).join(Venue).all()
   return render_template('pages/shows.html', shows=data)
 
 @app.route('/shows/create', methods=['GET'])
