@@ -114,7 +114,8 @@ def venues():
   # TODO: replace with real venues data.
   #       num_shows should be aggregated based on number of upcoming shows per venue.
   data = Venue.query.distinct(Venue.state, Venue.city)
-  return render_template('pages/venues.html', venues=data);
+  venues = Venue.query.all()
+  return render_template('pages/venues.html', venues=venues, data=data);
 
 @app.route('/venues/search', methods=['POST'])
 def search_venues():
@@ -182,12 +183,20 @@ def create_venue_submission():
 
 @app.route('/venues/<venue_id>', methods=['DELETE'])
 def delete_venue(venue_id):
+  try:
+      venue = Venue.query.get(venue_id)
+      db.session.delete(venue)
+      db.session.commit()
+  except:
+      db.session.rollback()
+  finally:
+      db.session.close()
   # TODO: Complete this endpoint for taking a venue_id, and using
   # SQLAlchemy ORM to delete a record. Handle cases where the session commit could fail.
 
   # BONUS CHALLENGE: Implement a button to delete a Venue on a Venue Page, have it so that
   # clicking that button delete it from the db then redirect the user to the homepage
-  return None
+  return render_template('pages/home.html')
 
 #  Artists
 #  ----------------------------------------------------------------
@@ -242,7 +251,24 @@ def edit_artist(artist_id):
 def edit_artist_submission(artist_id):
   # TODO: take values from the form submitted, and update existing
   # artist record with ID <artist_id> using the new attributes
-
+  try:
+    artist = Artist.query.get(artist_id)
+    req = request.form
+    artist.name = req.get('name', '')
+    artist.city = req.get('city', '')
+    artist.state = req.get('state', '')
+    artist.phone = req.get('phone', '')
+    artist.genres = req.getlist('genres')
+    artist.facebook_link = req.get('facebook_link', '')
+    artist.website_link = req.get('website_link', '')
+    artist.image_link = req.get('image_link', '')
+    artist.seeking_venue = req.get('seeking_venue', '')
+    artist.seeking_description = req.get('seeking_venue_description', '')
+    db.session.commit()
+  except:
+    db.session.rollback()
+  finally:
+    db.session.close()
   return redirect(url_for('show_artist', artist_id=artist_id))
 
 @app.route('/venues/<int:venue_id>/edit', methods=['GET'])
@@ -255,6 +281,25 @@ def edit_venue(venue_id):
 def edit_venue_submission(venue_id):
   # TODO: take values from the form submitted, and update existing
   # venue record with ID <venue_id> using the new attributes
+  try:
+    venue = Venue.query.get(venue_id)
+    req = request.form
+    venue.name = req.get('name', '')
+    venue.city = req.get('city', '')
+    venue.state = req.get('state', '')
+    venue.address = req.get('address', '')
+    venue.phone = req.get('phone', '')
+    venue.genres = req.getlist('genres')
+    venue.facebook_link = req.get('facebook_link', '')
+    venue.website_link = req.get('website_link', '')
+    venue.image_link = req.get('image_link', '')
+    venue.seeking_venue = req.get('seeking_talent', '')
+    venue.seeking_description = req.get('seeking_talent_description', '')
+    db.session.commit()
+  except:
+    db.session.rollback()
+  finally:
+    db.session.close()
   return redirect(url_for('show_venue', venue_id=venue_id))
 
 #  Create Artist
