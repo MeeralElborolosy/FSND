@@ -36,14 +36,19 @@ class MentorshipTestCase(unittest.TestCase):
         self.user_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllITVdXZjF4X19aU3FOMWd1dDVEYiJ9.eyJpc3MiOiJodHRwczovL21lZXJhbHNmaXJzdHdlYmFwcC51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDkxMjkzMzA4MTUwNzA2MzkxMzgiLCJhdWQiOlsibWVudG9yc2hpcCIsImh0dHBzOi8vbWVlcmFsc2ZpcnN0d2ViYXBwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2MDMzNTA2ODIsImV4cCI6MTYwMzQzNzA4MiwiYXpwIjoicGhTaWY4NXVLVTkyZDhWNXdvZGxwbXJNZEpxd2tyM1ciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsicmF0ZTpwYXJ0aWNpcGFudHMiLCJyZWFkOnBhcnRpY2lwYW50cyIsInJlYWQ6cHJvamVjdHMiXX0.McAhkRFN8LRCZw5aklbm8xAJffIrYcw9XlNTJQlrr1ZfbcK0CtC8VwXlBlBSwo5-GbPas8FaGC5SO53jnW9VqkpjSNQndO7eGu1-oiQ0crAxpRMVjz5-wz8nEXWR6cEvgRLEplvTFSv1ISFWLhzf7vqEYtf2CEJSr6KCk8pDfYu9SNwDe5-RNxcT0Su8hI7g6YaoNJ47QE2MLjtuWqyV6UCSbZSDrsg15c1ECJvFFKOTJC_sOqsz0hM1A15b_9wxzDo9ZMVQpjrX3SWTrBFCQp8arDqdMddrFgkINfbSht63f7EBxTyuKqi8YLpViTZWcQb3zDVykgWzx0GTQNRe_w'
         self.admin_header = {'Authorization': 'Bearer '+ self.admin_token}
         self.user_header = {'Authorization': 'Bearer '+ self.user_token}
-        self.deleted_project_id = 16
-        self.deleted_participant_id = 16
         # binds the app to the current context
         with self.app.app_context():
             self.db = SQLAlchemy()
             self.db.init_app(self.app)
             # create all tables
             self.db.create_all()
+            dummy_participant = Participant(name='dummy', skills='dummy', is_mentor=True)
+            dummy_project = Project(name='dummy', description='dummy')
+            self.db.session.add(dummy_project)
+            self.db.session.add(dummy_participant)
+            self.db.session.commit()
+            self.deleted_participant_id = dummy_participant.id
+            self.deleted_project_id = dummy_project.id
 
     def tearDown(self):
         """Executed after reach test"""

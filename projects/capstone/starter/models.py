@@ -7,7 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 username = "postgres"
 password = "899162mm*"
 database_name = "mentorship"
-database_path = "postgresql://{}:{}@{}/{}".format(username, password, 'localhost:5432', database_name)
+database_path = "postgresql://{}:{}@{}/{}".format(username, password, '0.0.0.0:5432', database_name)
 
 DEFAULT_RATING = 0
 
