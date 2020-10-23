@@ -1,10 +1,85 @@
 # Mentorship Application
-# Description:
+## Description:
 This API manages a mentorship program. Participants in this program may either be mentors or mentees. Participants may
 enroll in one or more projects. There are no restrictions to the number of mentors or mentees per project. An admin has
 an almost unlimited access to the API except that they can't rate participants. Users may rate participants,
 view participants and projects as well as search for a project by description.
-# Models:
+## Getting Started:
+### Installing Dependencies
+#### Python 3.7
+
+Follow instructions to install the latest version of python for your platform in the [python docs](https://docs.python.org/3/using/unix.html#getting-and-installing-the-latest-version-of-python)
+
+#### Virtual Enviornment
+
+We recommend working within a virtual environment whenever using Python for projects. This keeps your dependencies for each project separate and organaized. Instructions for setting up a virual enviornment for your platform can be found in the [python docs](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
+
+#### PIP Dependencies
+
+Once you have your virtual environment setup and running, install dependencies by running:
+
+```bash
+pip install -r requirements.txt
+```
+
+This will install all of the required packages we selected within the `requirements.txt` file.
+
+##### Key Dependencies
+
+- [Flask](http://flask.pocoo.org/)  is a lightweight backend microservices framework. Flask is required to handle requests and responses.
+
+- [SQLAlchemy](https://www.sqlalchemy.org/) is the Python SQL toolkit and ORM we'll use handle the postgres database
+
+- [Flask-CORS](https://flask-cors.readthedocs.io/en/latest/#) is the extension we'll use to handle cross origin requests from our frontend server. 
+
+## Database Setup
+With Postgres running, create a database and run the migrations through the following commands:
+
+```bash
+createdb mentorship
+python manage.py db upgrade
+```
+
+## Running the server
+
+To run the server, execute:
+
+```bash
+export DATABASE_URL=postgresql://{}:{}@localhost:5432/mentorship
+export AUTH0_DOMAIN=meeralsfirstwebapp.us.auth0.com
+export ALGORITHMS=['RS256']
+export API_AUDIENCE=mentorship
+export FLASK_APP=app.py
+flask run --reload
+```
+
+The `--reload` option will detect file changes and restart the server automatically.
+
+Setting the `FLASK_APP` variable to `app.py` directs flask to use the `app.py` file to find the application. 
+
+## Authentication:
+
+This application uses third party authentication (Auth0)
+
+In order to generate an access token, first you have to sign up to [Auth0](auth0.com)
+
+Your account will need to be assigned a role by the application manager
+
+After you are assigned a role, login from [here](https://meeralsfirstwebapp.us.auth0.com/authorize?audience=mentorship&response_type=token&client_id=phSif85uKU92d8V5wodlpmrMdJqwkr3W&redirect_uri=http://login-completed)
+
+After you complete the login, copy the access_token argument in the url and use it to create requests
+
+The authentication auth0 uses is Bearer token authentication. 
+
+Requests will need to have the following header {"Authentication: Bearer <token>"}
+
+## Testing
+While the server is running, in order to test all endpoints run the following command
+```bash
+python test_app.py
+```
+
+## Models:
 * Participant:
 
     A participant has a name, skills, and a boolean attribute that determines whether or not they're a mentor
@@ -18,14 +93,14 @@ view participants and projects as well as search for a project by description.
 * Participant_Project Relationship:
 
     Participants and projects have a many to many relationship. One participant can be enrolled in multiple projects and a single project may have multiple enrolled partiicpants
-# Roles:
+## Roles:
 * Admin:
 
     Can access all endpoints except PATCH r'/participants/\<int:id>/rate'
 * User:
 
     Can only access the GET endpoints, POST '/projects/search?page=<page_number>' and PATCH r'/participants/\<int:id>/rate'
-# Endpoints:
+## Endpoints:
 * GET '/mentors?page=<page_number>'
 
   Fetches paginated mentors with the limit of 10 mentors per page
