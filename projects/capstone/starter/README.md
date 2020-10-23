@@ -1,10 +1,12 @@
 # Mentorship Application
-## Description:
+## Description
 This API manages a mentorship program. Participants in this program may either be mentors or mentees. Participants may
 enroll in one or more projects. There are no restrictions to the number of mentors or mentees per project. An admin has
 an almost unlimited access to the API except that they can't rate participants. Users may rate participants,
 view participants and projects as well as search for a project by description.
-## Getting Started:
+
+This app is deployed in https://mentorship-app.herokuapp.com/
+## Getting Started
 ### Installing Dependencies
 #### Python 3.7
 
@@ -57,7 +59,7 @@ The `--reload` option will detect file changes and restart the server automatica
 
 Setting the `FLASK_APP` variable to `app.py` directs flask to use the `app.py` file to find the application. 
 
-## Authentication:
+## Authentication
 
 This application uses third party authentication (Auth0)
 
@@ -83,7 +85,7 @@ Second, while the server is running, run the following command
 python test_app.py
 ```
 
-## Models:
+## Models
 * Participant:
 
     A participant has a name, skills, and a boolean attribute that determines whether or not they're a mentor
@@ -97,14 +99,14 @@ python test_app.py
 * Participant_Project Relationship:
 
     Participants and projects have a many to many relationship. One participant can be enrolled in multiple projects and a single project may have multiple enrolled partiicpants
-## Roles:
+## Roles
 * Admin:
 
     Can access all endpoints except PATCH r'/participants/\<int:id>/rate'
 * User:
 
     Can only access the GET endpoints, POST '/projects/search?page=<page_number>' and PATCH r'/participants/\<int:id>/rate'
-## Endpoints:
+## Endpoints
 * GET '/mentors?page=<page_number>'
 
   Fetches paginated mentors with the limit of 10 mentors per page
