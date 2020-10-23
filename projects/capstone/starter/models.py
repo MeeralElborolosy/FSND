@@ -5,18 +5,18 @@ from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
 
 database_path = os.getenv('DATABASE_URL')
-print('models '+database_path)
+print('models ' + database_path)
 
 DEFAULT_RATING = 0
 
 db = SQLAlchemy()
+
 
 def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_DATABASE_URI"] = database_path
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
-    print(db)
     db.create_all()
 
 
@@ -93,6 +93,9 @@ class Participant(db.Model):
 
 
 class Participant_Project(db.Model):
-   __tablename__ = 'participant_project'
-   participant_id = Column(Integer, ForeignKey('participant.id'), primary_key=True)
-   project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)
+    __tablename__ = 'participant_project'
+    participant_id = Column(
+        Integer,
+        ForeignKey('participant.id'),
+        primary_key=True)
+    project_id = Column(Integer, ForeignKey('project.id'), primary_key=True)

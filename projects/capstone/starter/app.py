@@ -25,8 +25,12 @@ def create_app(test_config=None):
 
     @app.after_request
     def after_request(response):
-        response.headers.add('Access-Control-Allow-Headers','Content-Type,Authorization,true')
-        response.headers.add( 'Access-Control-Allow-Methods','GET,PUT,POST,PATCH,DELETE,OPTIONS')
+        response.headers.add(
+            'Access-Control-Allow-Headers',
+            'Content-Type,Authorization,true')
+        response.headers.add(
+            'Access-Control-Allow-Methods',
+            'GET,PUT,POST,PATCH,DELETE,OPTIONS')
         return response
 
     @app.route('/mentors')
@@ -98,7 +102,9 @@ def create_app(test_config=None):
         participant = Participant.query.get(id)
         if participant is None:
             abort(404)
-        projects = Participant_Project.query.filter_by(participant_id=id).with_entities(Participant_Project.project_id).all()
+        projects = Participant_Project.query.filter_by(
+            participant_id=id).with_entities(
+            Participant_Project.project_id).all()
         return jsonify({
             'success': True,
             'projects': projects
@@ -121,8 +127,13 @@ def create_app(test_config=None):
         project = Project.query.get(id)
         if project is None:
             abort(404)
-        participants = Participant_Project.query.filter_by(project_id=id).with_entities(Participant_Project.participant_id).all()
-        mentors_count = len(Participant.query.filter(Participant.id.in_(participants)).filter_by(is_mentor=True).all())
+        participants = Participant_Project.query.filter_by(
+            project_id=id).with_entities(
+            Participant_Project.participant_id).all()
+        mentors_count = len(
+            Participant.query.filter(
+                Participant.id.in_(participants)).filter_by(
+                is_mentor=True).all())
         return jsonify({
             'success': True,
             'participants': participants,
@@ -135,7 +146,9 @@ def create_app(test_config=None):
         try:
             data = request.get_json()
             search_term = data.get('search_term', '')
-            projects = Project.query.filter(Project.description.ilike('%' + search_term + '%')).all()
+            projects = Project.query.filter(
+                Project.description.ilike(
+                    '%' + search_term + '%')).all()
             formatted_projects = pagenate(request, projects)
             if len(formatted_projects) == 0:
                 abort(404)
@@ -158,7 +171,8 @@ def create_app(test_config=None):
             name = data.get('name', '')
             skills = data.get('skills', '')
             is_mentor = data.get('is_mentor')
-            participant = Participant(name=name, skills=skills, is_mentor=is_mentor)
+            participant = Participant(
+                name=name, skills=skills, is_mentor=is_mentor)
             participant.insert()
             participants = Participant.query.all()
             formatted_participants = pagenate(request, participants)
@@ -168,9 +182,8 @@ def create_app(test_config=None):
                 'participants': formatted_participants,
                 'total_participants': len(participants)
             }), 200
-        except:
+        except BaseException:
             abort(422)
-
 
     @app.route('/projects', methods=['POST'])
     @requires_auth('create:projects')
@@ -189,7 +202,7 @@ def create_app(test_config=None):
                 'projects': formatted_projects,
                 'total_projects': len(projects)
             }), 200
-        except:
+        except BaseException:
             abort(422)
 
     @app.route('/projects/<int:id>', methods=['PATCH'])
@@ -220,7 +233,8 @@ def create_app(test_config=None):
             participant = Participant.query.get(id)
             if participant is None:
                 abort(404)
-            participant.rating = int((participant.rating * participant.rated_by + rating)/(participant.rated_by + 1))
+            participant.rating = int(
+                (participant.rating * participant.rated_by + rating) / (participant.rated_by + 1))
             participant.rated_by = participant.rated_by + 1
             participant.update()
             return jsonify({
@@ -233,7 +247,8 @@ def create_app(test_config=None):
             else:
                 abort(422)
 
-    @app.route('/participants/<int:participant_id>/enroll/<int:project_id>', methods=['PATCH'])
+    @app.route('/participants/<int:participant_id>/enroll/<int:project_id>',
+               methods=['PATCH'])
     @requires_auth('enroll:participants')
     def join_project(payload, participant_id, project_id):
         try:

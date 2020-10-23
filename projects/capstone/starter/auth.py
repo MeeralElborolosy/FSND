@@ -7,11 +7,9 @@ from urllib.request import urlopen
 
 
 AUTH0_DOMAIN = os.getenv('AUTH0_DOMAIN')
-print(AUTH0_DOMAIN)
 ALGORITHMS = os.getenv('ALGORITHMS')
-print(ALGORITHMS)
 API_AUDIENCE = os.getenv('API_AUDIENCE')
-print(API_AUDIENCE)
+
 
 class AuthError(Exception):
     def __init__(self, error, status_code):
@@ -128,7 +126,7 @@ def requires_auth(permission=''):
             token = get_token_auth_header()
             try:
                 payload = verify_decode_jwt(token)
-            except:
+            except BaseException:
                 abort(401)
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
