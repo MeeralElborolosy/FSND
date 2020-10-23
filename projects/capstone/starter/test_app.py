@@ -26,10 +26,8 @@ class MentorshipTestCase(unittest.TestCase):
             'skills': 'Programming',
             'is_mentor': False
         }
-        self.selected_participant_id = 30
-        self.selected_project_id = 32
-        self.admin_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllITVdXZjF4X19aU3FOMWd1dDVEYiJ9.eyJpc3MiOiJodHRwczovL21lZXJhbHNmaXJzdHdlYmFwcC51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMTMxNjU3NDgyMjEzMzE3NTM1NzIiLCJhdWQiOlsibWVudG9yc2hpcCIsImh0dHBzOi8vbWVlcmFsc2ZpcnN0d2ViYXBwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2MDMzNTA2NzQsImV4cCI6MTYwMzQzNzA3NCwiYXpwIjoicGhTaWY4NXVLVTkyZDhWNXdvZGxwbXJNZEpxd2tyM1ciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOnBhcnRpY2lwYW50cyIsImNyZWF0ZTpwcm9qZWN0cyIsImRlbGV0ZTpwYXJ0aWNpcGFudHMiLCJkZWxldGU6cHJvamVjdHMiLCJlbnJvbGw6cGFydGljaXBhbnRzIiwicmVhZDpwYXJ0aWNpcGFudHMiLCJyZWFkOnByb2plY3RzIl19.XSgPoLeMy4WtuWeJtNrV2BOjSxiqjugB7U12qy7SzWS0THjPE03gex92uoRYv7dJ5I-vvr5ojmZL1-awq_WA41Htx6pLbZnyQSk9asky0hKD-N8CJNiWykI3Bo1A3D3SaYc4C8EbSaPPi0OcP4W8VX7N_5YDPMjcIwAwiSpHLwkeWS0UxDpQyyqXqUphrvRAiX1enD4pJibq06_tSUtBTn8xx65fY2ubN7ygC8uVKr5IiKovNARWMZkwwKK3CyY-AS2zo0eXZ6ck2cTH9KK4h5kuTFk8HZZHZWS4V06EKFML0w7BNOv_64fiSXwMt622iUvuuiYynq96CcRFIGFzjg'
-        self.user_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllITVdXZjF4X19aU3FOMWd1dDVEYiJ9.eyJpc3MiOiJodHRwczovL21lZXJhbHNmaXJzdHdlYmFwcC51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDkxMjkzMzA4MTUwNzA2MzkxMzgiLCJhdWQiOlsibWVudG9yc2hpcCIsImh0dHBzOi8vbWVlcmFsc2ZpcnN0d2ViYXBwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2MDMzNTA2ODIsImV4cCI6MTYwMzQzNzA4MiwiYXpwIjoicGhTaWY4NXVLVTkyZDhWNXdvZGxwbXJNZEpxd2tyM1ciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsicmF0ZTpwYXJ0aWNpcGFudHMiLCJyZWFkOnBhcnRpY2lwYW50cyIsInJlYWQ6cHJvamVjdHMiXX0.McAhkRFN8LRCZw5aklbm8xAJffIrYcw9XlNTJQlrr1ZfbcK0CtC8VwXlBlBSwo5-GbPas8FaGC5SO53jnW9VqkpjSNQndO7eGu1-oiQ0crAxpRMVjz5-wz8nEXWR6cEvgRLEplvTFSv1ISFWLhzf7vqEYtf2CEJSr6KCk8pDfYu9SNwDe5-RNxcT0Su8hI7g6YaoNJ47QE2MLjtuWqyV6UCSbZSDrsg15c1ECJvFFKOTJC_sOqsz0hM1A15b_9wxzDo9ZMVQpjrX3SWTrBFCQp8arDqdMddrFgkINfbSht63f7EBxTyuKqi8YLpViTZWcQb3zDVykgWzx0GTQNRe_w'
+        self.admin_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllITVdXZjF4X19aU3FOMWd1dDVEYiJ9.eyJpc3MiOiJodHRwczovL21lZXJhbHNmaXJzdHdlYmFwcC51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMTMxNjU3NDgyMjEzMzE3NTM1NzIiLCJhdWQiOlsibWVudG9yc2hpcCIsImh0dHBzOi8vbWVlcmFsc2ZpcnN0d2ViYXBwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2MDM0Mjk3MjksImV4cCI6MTYwMzUxNjEyOSwiYXpwIjoicGhTaWY4NXVLVTkyZDhWNXdvZGxwbXJNZEpxd2tyM1ciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOnBhcnRpY2lwYW50cyIsImNyZWF0ZTpwcm9qZWN0cyIsImRlbGV0ZTpwYXJ0aWNpcGFudHMiLCJkZWxldGU6cHJvamVjdHMiLCJlbnJvbGw6cGFydGljaXBhbnRzIiwicmVhZDpwYXJ0aWNpcGFudHMiLCJyZWFkOnByb2plY3RzIl19.ggiYEXwYX8SMJ5PzCRkL4yS1grs2d8fpCG6sOLrq95iuSjqOMzb47EjCrrBfk3ata9gCH3fknpF5hc7Am0WLTXDwldQ7oTG8qb1lMnf95ff_sBgr3B2hLMjVCVL0v6WJ6ZkRkCgkulj0OxCqBMghirpjoKwFb2DtHykjQCXT6ww3vevIrsszKcp-0QLKOckPirZ1aTSVJVnGG6q0JRPsCoYASKBzLZcAjKKoiSnmF2N__Am7IqYojUIy-K7P8PgTlSpMx_RQx9ZQSCpyvoFisz07Q9_J4sWkTiXG0qqxqYkHtXWAXcpW3T7aqT4lCgmIrd4olOVJKWxjVuyf7Nz4Ew'
+        self.user_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllITVdXZjF4X19aU3FOMWd1dDVEYiJ9.eyJpc3MiOiJodHRwczovL21lZXJhbHNmaXJzdHdlYmFwcC51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDkxMjkzMzA4MTUwNzA2MzkxMzgiLCJhdWQiOlsibWVudG9yc2hpcCIsImh0dHBzOi8vbWVlcmFsc2ZpcnN0d2ViYXBwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2MDM0Mjk4MjAsImV4cCI6MTYwMzUxNjIyMCwiYXpwIjoicGhTaWY4NXVLVTkyZDhWNXdvZGxwbXJNZEpxd2tyM1ciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsicmF0ZTpwYXJ0aWNpcGFudHMiLCJyZWFkOnBhcnRpY2lwYW50cyIsInJlYWQ6cHJvamVjdHMiXX0.RgLoKUxKrmBscic_ZDI-YCDQuc0Hqqaj-K2CAVBZv--kSTwQfY5DYIQIkfIrWOc6-xR9yF-KQPJB65hay4jWc89so3irLaMFYCz4nuPV4AHVbO6kll4opfEo9LivSpHwI54tTD19rtJuebAJ_eDahSwKTdYbYOYvdxesA0AfC0VJWh1dgkaiPQR2ztKs0a-VibMOzfjvWSsCj5OWEi7sUs8ok7tUDurpGq6VvNm_FaYAebTlO4S7wFvPE3C40hH7lXN7Up2si-xGJ3AY0OEf4e94TMvrmJdvGdgfJjqeyEbYOJmX1q8miY5WVuAyBq9rYG-32NBLC9csgtr1wYYT3w'
         self.admin_header = {'Authorization': 'Bearer ' + self.admin_token}
         self.user_header = {'Authorization': 'Bearer ' + self.user_token}
         # binds the app to the current context
@@ -38,14 +36,27 @@ class MentorshipTestCase(unittest.TestCase):
             self.db.init_app(self.app)
             # create all tables
             self.db.create_all()
-            dummy_participant = Participant(
+            dummy_participant_delete = Participant(
                 name='dummy', skills='dummy', is_mentor=True)
-            dummy_project = Project(name='dummy', description='dummy')
-            self.db.session.add(dummy_project)
-            self.db.session.add(dummy_participant)
+            dummy_mentor_populate = Participant(
+                name='Meeral', skills='Programming', is_mentor=True)
+            dummy_mentee_populate = Participant(
+                name='Tofy', skills='Gaming', is_mentor=False)
+            dummy_project_delete = Project(name='dummy', description='dummy')
+            dummy_project_populate = Project(name='dummy', description='dummy')
+            dummy_mentee_populate.projects.append(dummy_project_populate)
+            dummy_mentor_populate.projects.append(dummy_project_populate)
+            self.db.session.add(dummy_project_delete)
+            self.db.session.add(dummy_project_populate)
+            self.db.session.add(dummy_participant_delete)
+            self.db.session.add(dummy_mentor_populate)
+            self.db.session.add(dummy_mentee_populate)
             self.db.session.commit()
-            self.deleted_participant_id = dummy_participant.id
-            self.deleted_project_id = dummy_project.id
+            self.deleted_participant_id = dummy_participant_delete.id
+            self.deleted_project_id = dummy_project_delete.id
+            self.unauthorized_delete_participant_id = dummy_mentee_populate.id
+            self.selected_participant_id = dummy_mentor_populate.id
+            self.selected_project_id = dummy_project_populate.id
 
     def tearDown(self):
         """Executed after reach test"""
@@ -282,6 +293,15 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['participant'])
 
+    def test_403_if_unauthorized_rate(self):
+        res = self.client().patch('/participants/' +
+                                  str(self.selected_participant_id) +
+                                  '/rate', json={'rating': 3}, headers=self.admin_header)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 403)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'Permission not found.')
+
     def test_404_if_rate_participant_not_found(self):
         res = self.client().patch(
             '/participants/10000/rate',
@@ -343,6 +363,14 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
         self.assertEqual(data['message'], 'resource not found')
+
+    def test_403_if_unauthorized_delete(self):
+        res = self.client().delete('/participants/' +
+                                   str(self.unauthorized_delete_participant_id), headers=self.user_header)
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 403)
+        self.assertEqual(data['success'], False)
+        self.assertEqual(data['message'], 'Permission not found.')
 
     def test_delete_project(self):
         res = self.client().delete('/projects/' +

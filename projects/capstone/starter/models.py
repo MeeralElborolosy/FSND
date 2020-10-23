@@ -5,7 +5,6 @@ from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
 
 database_path = os.getenv('DATABASE_URL')
-print('models ' + database_path)
 
 DEFAULT_RATING = 0
 
