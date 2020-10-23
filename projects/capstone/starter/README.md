@@ -74,7 +74,11 @@ The authentication auth0 uses is Bearer token authentication.
 Requests will need to have the following header {"Authentication: Bearer <token>"}
 
 ## Testing
-While the server is running, in order to test all endpoints run the following command
+All the api endpoints are tested using unittests in test_app.py
+
+First, modify the admin_token and user_token in the MentorshipTestCase class in test_app.py
+
+Second, while the server is running, run the following command
 ```bash
 python test_app.py
 ```
