@@ -1,13 +1,11 @@
+import os
 import datetime
-from flask_migrate import Migrate
 from sqlalchemy import ForeignKey, Column, String, Integer, Boolean, DateTime, create_engine
 from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
 
-username = "postgres"
-password = "899162mm*"
-database_name = "mentorship"
-database_path = "postgresql://{}:{}@{}/{}".format(username, password, '0.0.0.0:5432', database_name)
+database_path = os.getenv('DATABASE_URL')
+print('models '+database_path)
 
 DEFAULT_RATING = 0
 
@@ -18,6 +16,7 @@ def setup_db(app, database_path=database_path):
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
+    print(db)
     db.create_all()
 
 

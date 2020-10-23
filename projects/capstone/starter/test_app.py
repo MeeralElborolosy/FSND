@@ -14,11 +14,8 @@ class MentorshipTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.username = "postgres"
-        self.password = "899162mm*"
-        self.database_name = "mentorship"
-        self.database_path = "postgresql://{}:{}@{}/{}".format(
-            self.username, self.password, 'localhost:5432', self.database_name)
+        self.database_path = os.getenv('DATABASE_URL')
+        print('setup '+self.database_path)
         setup_db(self.app, self.database_path)
 
         self.new_project = {
