@@ -99,6 +99,7 @@ If you want to test it locally or you want to assign roles to yourself, follow t
 * A user can (read:projects, read:participants, rate:participants)
 * An admin can (read:projects, read:participants, create:projects, create:participants, delete:projects, delete:participants, enroll:participants)
 * In order to access the login page, fill in this URL with the data from your Application and API:
+
 https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=token&client_id={{YOUR_CLIENT_ID}}&redirect_uri={{YOUR_CALLBACK_URI}}
 
 In my case, the URL is:
