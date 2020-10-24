@@ -1,4 +1,11 @@
 # Mentorship Application
+##Motivation
+This project is the capstone project for the Udacity Full Stack Web Development Nanodegree. In this project I am supposed to implement
+everything that I learned throughout this program. Starting from database modelling, RESTful api development and documentation, role-based access, testing and deployment.
+
+My motivation for this project was not only to implement what I learned but also to create a useful API that serves a purpose
+I have always aspired for; education. I hope this project connects mentors and mentees through projects of common interests
+and that it would help develop all the participants' skills.
 ## Description
 This API manages a mentorship program. Participants in this program may either be mentors or mentees. Participants may
 enroll in one or more projects. There are no restrictions to the number of mentors or mentees per project. An admin has
@@ -59,10 +66,19 @@ The `--reload` option will detect file changes and restart the server automatica
 
 Setting the `FLASK_APP` variable to `app.py` directs flask to use the `app.py` file to find the application. 
 
-## Authentication
-
+## Authorization
 This application uses third party authentication (Auth0)
 
+The authentication auth0 uses is Bearer token authentication. 
+
+Requests will need to have the following header "Authorization: Bearer <token>"
+
+Example:
+````
+curl -H "Authorization: Bearer <token>" https://mentorship-app.herokuapp.com/projects
+````
+
+### Live Application
 In order to generate an access token, first you have to sign up to [Auth0](auth0.com)
 
 Your account will need to be assigned a role by the application manager
@@ -71,9 +87,27 @@ After you are assigned a role, login from [here](https://meeralsfirstwebapp.us.a
 
 After you complete the login, copy the access_token argument in the url and use it to create requests
 
-The authentication auth0 uses is Bearer token authentication. 
+### Local server
+If you want to test it locally or you want to assign roles to yourself, follow the following steps:
+* Navigate to your auth0 dashboard then select Applications -\> Create Application -\> Single Page Application
+* In your created Application -> Settings -> Application URIs -> set a value for Allowed Callback URLs and save
+* Afterwards, select APIs -\> Create API
+* Open your created API -> Settings RBAC Settings -> Enable RBAC -> Enable Add permissions in the access token and save
+* Still in your created API -> Permissions -> Add the following Permissions (read:projects, read:participants, create:projects, create:participants, delete:projects, delete:participants, enroll:participants, rate:participants)
+* Then, you will have to create two roles (User and Admin) by selecting Users & Roles -\> Roles -\> Create Role
+* In order to assign permissions to a certain role select this role -\> Permissions -\> Add Permissions -\> Choose your created API -\> Select the corresponding permissions for each role
+* A user can (read:projects, read:participants, rate:participants)
+* An admin can (read:projects, read:participants, create:projects, create:participants, delete:projects, delete:participants, enroll:participants)
+* In order to access the login page, fill in this URL with the data from your Application and API:
+https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=token&client_id={{YOUR_CLIENT_ID}}&redirect_uri={{YOUR_CALLBACK_URI}}
 
-Requests will need to have the following header {"Authentication: Bearer <token>"}
+In my case, the URL is:
+
+ht<span>tps://meeralsfirstwebapp.us.auth0.com/authorize?audience=mentorship&response_type=token&client_id=phSif85uKU92d8V5wodlpmrMdJqwkr3W&redirect_uri=ht<span>tp://login-completed
+
+* After you login, copy the access_token generated in the url and use it in your authorization
+* You will need to modify the AUTH0_DOMAIN and the API_AUDIENCE in the environment variables that we set earlier
+* Use the tokens that you created in the testing as instructed
 
 ## Testing
 All the api endpoints are tested using unittests in test_app.py

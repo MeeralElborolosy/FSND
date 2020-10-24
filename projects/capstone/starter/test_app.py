@@ -26,8 +26,50 @@ class MentorshipTestCase(unittest.TestCase):
             'skills': 'Programming',
             'is_mentor': False
         }
-        self.admin_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllITVdXZjF4X19aU3FOMWd1dDVEYiJ9.eyJpc3MiOiJodHRwczovL21lZXJhbHNmaXJzdHdlYmFwcC51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMTMxNjU3NDgyMjEzMzE3NTM1NzIiLCJhdWQiOlsibWVudG9yc2hpcCIsImh0dHBzOi8vbWVlcmFsc2ZpcnN0d2ViYXBwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2MDM0Mjk3MjksImV4cCI6MTYwMzUxNjEyOSwiYXpwIjoicGhTaWY4NXVLVTkyZDhWNXdvZGxwbXJNZEpxd2tyM1ciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOnBhcnRpY2lwYW50cyIsImNyZWF0ZTpwcm9qZWN0cyIsImRlbGV0ZTpwYXJ0aWNpcGFudHMiLCJkZWxldGU6cHJvamVjdHMiLCJlbnJvbGw6cGFydGljaXBhbnRzIiwicmVhZDpwYXJ0aWNpcGFudHMiLCJyZWFkOnByb2plY3RzIl19.ggiYEXwYX8SMJ5PzCRkL4yS1grs2d8fpCG6sOLrq95iuSjqOMzb47EjCrrBfk3ata9gCH3fknpF5hc7Am0WLTXDwldQ7oTG8qb1lMnf95ff_sBgr3B2hLMjVCVL0v6WJ6ZkRkCgkulj0OxCqBMghirpjoKwFb2DtHykjQCXT6ww3vevIrsszKcp-0QLKOckPirZ1aTSVJVnGG6q0JRPsCoYASKBzLZcAjKKoiSnmF2N__Am7IqYojUIy-K7P8PgTlSpMx_RQx9ZQSCpyvoFisz07Q9_J4sWkTiXG0qqxqYkHtXWAXcpW3T7aqT4lCgmIrd4olOVJKWxjVuyf7Nz4Ew'
-        self.user_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IllITVdXZjF4X19aU3FOMWd1dDVEYiJ9.eyJpc3MiOiJodHRwczovL21lZXJhbHNmaXJzdHdlYmFwcC51cy5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDkxMjkzMzA4MTUwNzA2MzkxMzgiLCJhdWQiOlsibWVudG9yc2hpcCIsImh0dHBzOi8vbWVlcmFsc2ZpcnN0d2ViYXBwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE2MDM0Mjk4MjAsImV4cCI6MTYwMzUxNjIyMCwiYXpwIjoicGhTaWY4NXVLVTkyZDhWNXdvZGxwbXJNZEpxd2tyM1ciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsicmF0ZTpwYXJ0aWNpcGFudHMiLCJyZWFkOnBhcnRpY2lwYW50cyIsInJlYWQ6cHJvamVjdHMiXX0.RgLoKUxKrmBscic_ZDI-YCDQuc0Hqqaj-K2CAVBZv--kSTwQfY5DYIQIkfIrWOc6-xR9yF-KQPJB65hay4jWc89so3irLaMFYCz4nuPV4AHVbO6kll4opfEo9LivSpHwI54tTD19rtJuebAJ_eDahSwKTdYbYOYvdxesA0AfC0VJWh1dgkaiPQR2ztKs0a-VibMOzfjvWSsCj5OWEi7sUs8ok7tUDurpGq6VvNm_FaYAebTlO4S7wFvPE3C40hH7lXN7Up2si-xGJ3AY0OEf4e94TMvrmJdvGdgfJjqeyEbYOJmX1q8miY5WVuAyBq9rYG-32NBLC9csgtr1wYYT3w'
+        self.admin_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI' \
+                           '6IllITVdXZjF4X19aU3FOMWd1dDVEYiJ9.eyJpc3MiO' \
+                           'iJodHRwczovL21lZXJhbHNmaXJzdHdlYmFwcC51cy5h' \
+                           'dXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnw' \
+                           'xMTMxNjU3NDgyMjEzMzE3NTM1NzIiLCJhdWQiOlsibW' \
+                           'VudG9yc2hpcCIsImh0dHBzOi8vbWVlcmFsc2ZpcnN0d' \
+                           '2ViYXBwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJp' \
+                           'YXQiOjE2MDM1MDI0ODYsImV4cCI6MTYwMzU4ODg4Niw' \
+                           'iYXpwIjoicGhTaWY4NXVLVTkyZDhWNXdvZGxwbXJNZE' \
+                           'pxd2tyM1ciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlI' \
+                           'GVtYWlsIiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOnBh' \
+                           'cnRpY2lwYW50cyIsImNyZWF0ZTpwcm9qZWN0cyIsImR' \
+                           'lbGV0ZTpwYXJ0aWNpcGFudHMiLCJkZWxldGU6cHJvam' \
+                           'VjdHMiLCJlbnJvbGw6cGFydGljaXBhbnRzIiwicmVhZ' \
+                           'DpwYXJ0aWNpcGFudHMiLCJyZWFkOnByb2plY3RzIl19' \
+                           '.daW63fl2a2zVtNxWAapUhGzGA68BahYr8WP2MuRcnf' \
+                           'pftkRhfIOKwqTfd3UyDji4Gb39DdIHO1-QKQh7kjluM' \
+                           'JdekDpCfLWslIPmokpxHDOJGr98JE56cepWeE_V5XcA' \
+                           'pI1nh0dnXhOkDeeeb5y3upsXlROsJx-8q1HUhjZ0CAb' \
+                           'A0Wi3L1sYtUmpsyhbYv9PYtikZTsFv0ofaumBg9b1C6' \
+                           '43BIpTtg08Flh3g0fnPav-Yw8wi_a4SWn3mj4zBw2E1' \
+                           '_zA60q4sY9Hea90JrFaU_1EfGIhLpE1nDsphKe_JRqO' \
+                           'J6mdy3ZKfTBVnfU2qA6Lk3jY_vJsSVtIERwlL8bfnA'
+        self.user_token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI' \
+                          '6IllITVdXZjF4X19aU3FOMWd1dDVEYiJ9.eyJpc3MiO' \
+                          'iJodHRwczovL21lZXJhbHNmaXJzdHdlYmFwcC51cy5h' \
+                          'dXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnw' \
+                          'xMDkxMjkzMzA4MTUwNzA2MzkxMzgiLCJhdWQiOlsibW' \
+                          'VudG9yc2hpcCIsImh0dHBzOi8vbWVlcmFsc2ZpcnN0d' \
+                          '2ViYXBwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJp' \
+                          'YXQiOjE2MDM1MDI2MDYsImV4cCI6MTYwMzU4OTAwNiw' \
+                          'iYXpwIjoicGhTaWY4NXVLVTkyZDhWNXdvZGxwbXJNZE' \
+                          'pxd2tyM1ciLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlI' \
+                          'GVtYWlsIiwicGVybWlzc2lvbnMiOlsicmF0ZTpwYXJ0' \
+                          'aWNpcGFudHMiLCJyZWFkOnBhcnRpY2lwYW50cyIsInJ' \
+                          'lYWQ6cHJvamVjdHMiXX0.fzZkrGdTSMEbVOPYPbG28X' \
+                          'EOJRMyWepxjBN6IYOxFgHBG1QNiHey-61LiQFGyxA32' \
+                          'GwIaNyWFQ80-57tIc6s6vVnEGNxJDG0pU05D7aVsIbN' \
+                          'KZtt3OQ7WowmLdc1fTjd0eyQ_39zOyzn2vLJY9ytEvl' \
+                          'wABwXx3FeMjW1uOkF02fRc5_9xvyK6fiEAyFWJ-J14d' \
+                          'qFlZ49k6-jC8m9N8-8h5d96hfnuMapqLhcvrmvKvhdy' \
+                          '-0368oWGy7-N1HULT0emHM773GF6aIODGXk1Mplf6pl' \
+                          'moRpHhZGb3KP024oGsGLewH8PkRHj2abvyFGcchu0y4' \
+                          'o-d63-M2v-gXIdA4wFw'
         self.admin_header = {'Authorization': 'Bearer ' + self.admin_token}
         self.user_header = {'Authorization': 'Bearer ' + self.user_token}
         # binds the app to the current context
@@ -70,7 +112,8 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertTrue(data['mentors'])
 
     def test_404_if_mentors_page_doesnt_exist(self):
-        res = self.client().get('/mentors?page=1000', headers=self.admin_header)
+        res = self.client().get('/mentors?page=1000', headers=self.admin_header
+                                )
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
@@ -84,7 +127,8 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertTrue(data['mentees'])
 
     def test_404_if_mentees_page_doesnt_exist(self):
-        res = self.client().get('/mentees?page=1000', headers=self.admin_header)
+        res = self.client().get('/mentees?page=1000', headers=self.admin_header
+                                )
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
@@ -98,7 +142,8 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertTrue(data['participants'])
 
     def test_404_if_participants_page_doesnt_exist(self):
-        res = self.client().get('/participants?page=1000', headers=self.admin_header)
+        res = self.client().get('/participants?page=1000',
+                                headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
@@ -112,7 +157,8 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertTrue(data['projects'])
 
     def test_404_if_projects_page_doesnt_exist(self):
-        res = self.client().get('/projects?page=1000', headers=self.admin_header)
+        res = self.client().get('/projects?page=1000',
+                                headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
@@ -120,14 +166,16 @@ class MentorshipTestCase(unittest.TestCase):
 
     def test_get_participants_by_id(self):
         res = self.client().get('/participants/' +
-                                str(self.selected_participant_id), headers=self.admin_header)
+                                str(self.selected_participant_id),
+                                headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
         self.assertTrue(data['participant'])
 
     def test_404_if_participant_id_doesnt_exist(self):
-        res = self.client().get('/participants/10000', headers=self.admin_header)
+        res = self.client().get('/participants/10000',
+                                headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
@@ -142,7 +190,7 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertEqual(data['success'], True)
         self.assertTrue(data['projects'])
 
-    def test_404_if_participant_id_doesnt_exist_in_get_projects_for_a_participant(
+    def test_404_if_participant_doesnt_exist_in_get_projects_for_a_participant(
             self):
         res = self.client().get(
             '/participants/10000/projects',
@@ -154,7 +202,8 @@ class MentorshipTestCase(unittest.TestCase):
 
     def test_get_projects_by_id(self):
         res = self.client().get('/projects/' +
-                                str(self.selected_project_id), headers=self.admin_header)
+                                str(self.selected_project_id),
+                                headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -233,7 +282,8 @@ class MentorshipTestCase(unittest.TestCase):
 
     def test_end_project(self):
         res = self.client().patch('/projects/' +
-                                  str(self.selected_project_id), headers=self.admin_header)
+                                  str(self.selected_project_id),
+                                  headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -259,7 +309,8 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertTrue(data['total_projects'])
 
     def test_search_project_if_search_term_empty(self):
-        res = self.client().post('/projects/search', json={}, headers=self.admin_header)
+        res = self.client().post('/projects/search', json={},
+                                 headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -287,7 +338,8 @@ class MentorshipTestCase(unittest.TestCase):
     def test_rate_participant(self):
         res = self.client().patch('/participants/' +
                                   str(self.selected_participant_id) +
-                                  '/rate', json={'rating': 3}, headers=self.user_header)
+                                  '/rate', json={'rating': 3},
+                                  headers=self.user_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -296,7 +348,8 @@ class MentorshipTestCase(unittest.TestCase):
     def test_403_if_unauthorized_rate(self):
         res = self.client().patch('/participants/' +
                                   str(self.selected_participant_id) +
-                                  '/rate', json={'rating': 3}, headers=self.admin_header)
+                                  '/rate', json={'rating': 3},
+                                  headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
@@ -323,8 +376,10 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertEqual(data['message'], 'unprocessable')
 
     def test_enroll_participant(self):
-        res = self.client().patch('/participants/' + str(self.selected_participant_id) + \
-                          '/enroll/' + str(self.selected_project_id), headers=self.admin_header)
+        res = self.client().patch('/participants/' +
+                                  str(self.selected_participant_id) +
+                                  '/enroll/' + str(self.selected_project_id),
+                                  headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(data['success'], True)
@@ -332,7 +387,8 @@ class MentorshipTestCase(unittest.TestCase):
 
     def test_404_if_enroll_participant_has_invalid_participant_id(self):
         res = self.client().patch('/participants/10000/enroll/' +
-                                  str(self.selected_project_id), headers=self.admin_header)
+                                  str(self.selected_project_id),
+                                  headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
@@ -349,7 +405,8 @@ class MentorshipTestCase(unittest.TestCase):
 
     def test_delete_participant(self):
         res = self.client().delete('/participants/' +
-                                   str(self.deleted_participant_id), headers=self.admin_header)
+                                   str(self.deleted_participant_id),
+                                   headers=self.admin_header)
         data = json.loads(res.data)
         participant = Participant.query.filter(
             Participant.id == self.deleted_participant_id).one_or_none()
@@ -358,7 +415,8 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertEqual(data['deleted'], self.deleted_participant_id)
 
     def test_404_if_delete_participant_not_found(self):
-        res = self.client().delete('/participants/10000', headers=self.admin_header)
+        res = self.client().delete('/participants/10000',
+                                   headers=self.admin_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)
@@ -366,7 +424,8 @@ class MentorshipTestCase(unittest.TestCase):
 
     def test_403_if_unauthorized_delete(self):
         res = self.client().delete('/participants/' +
-                                   str(self.unauthorized_delete_participant_id), headers=self.user_header)
+                                   str(self.unauthorized_delete_participant_id
+                                       ), headers=self.user_header)
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 403)
         self.assertEqual(data['success'], False)
@@ -374,7 +433,8 @@ class MentorshipTestCase(unittest.TestCase):
 
     def test_delete_project(self):
         res = self.client().delete('/projects/' +
-                                   str(self.deleted_project_id), headers=self.admin_header)
+                                   str(self.deleted_project_id),
+                                   headers=self.admin_header)
         data = json.loads(res.data)
         project = Project.query.filter(
             Project.id == self.deleted_project_id).one_or_none()
@@ -383,7 +443,8 @@ class MentorshipTestCase(unittest.TestCase):
         self.assertEqual(data['deleted'], self.deleted_project_id)
 
     def test_404_if_delete_project_not_found(self):
-        res = self.client().delete('/projects/10000', headers=self.admin_header)
+        res = self.client().delete('/projects/10000', headers=self.admin_header
+                                   )
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 404)
         self.assertEqual(data['success'], False)

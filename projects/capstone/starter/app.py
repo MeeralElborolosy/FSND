@@ -234,7 +234,8 @@ def create_app(test_config=None):
             if participant is None:
                 abort(404)
             participant.rating = int(
-                (participant.rating * participant.rated_by + rating) / (participant.rated_by + 1))
+                (participant.rating * participant.rated_by + rating) /
+                (participant.rated_by + 1))
             participant.rated_by = participant.rated_by + 1
             participant.update()
             return jsonify({

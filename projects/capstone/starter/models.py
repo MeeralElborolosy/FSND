@@ -1,6 +1,6 @@
 import os
 import datetime
-from sqlalchemy import ForeignKey, Column, String, Integer, Boolean, DateTime, create_engine
+from sqlalchemy import ForeignKey, Column, String, Integer, Boolean, DateTime
 from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
 
