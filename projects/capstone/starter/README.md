@@ -54,7 +54,7 @@ python manage.py db upgrade
 To run the server, execute:
 
 ```bash
-export DATABASE_URL=postgresql://{}:{}@localhost:5432/mentorship
+export DATABASE_URL=postgresql://{username}:{password}@localhost:5432/mentorship
 export AUTH0_DOMAIN=meeralsfirstwebapp.us.auth0.com
 export ALGORITHMS=['RS256']
 export API_AUDIENCE=mentorship
